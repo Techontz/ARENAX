@@ -4,8 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname:
-          'img.sofascore.com',
+        hostname: 'img.sofascore.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.sofascore.app',
       },
     ],
   },

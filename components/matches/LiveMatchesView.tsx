@@ -57,7 +57,7 @@ export const LiveMatchesView = () => {
                 item.homeTeam?.name ||
                 'Home Team',
 
-              logo: `https://img.sofascore.com/api/v1/team/${item.homeTeam?.id}/image`,
+              logo: `https://api.sofascore.app/api/v1/team/${item.homeTeam?.id}/image`,
             },
 
             teamB: {

@@ -22,7 +22,15 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
 
       <div className="flex items-center justify-between px-1 lg:px-2 mb-2 relative">
         <div className="flex flex-col items-center gap-2 w-12 lg:w-16">
-          <img src={match.teamA.logo} alt={match.teamA.name} className="w-8 h-8 lg:w-10 lg:h-10 object-contain" />
+        <img
+          src={match.teamA.logo}
+          alt={match.teamA.name}
+          className="w-8 h-8 lg:w-10 lg:h-10 object-contain"
+          onError={(e) => {
+            e.currentTarget.src =
+              '/images/default-team.png';
+          }}
+        />
         </div>
         
         <div className="flex items-center gap-3 lg:gap-4">
