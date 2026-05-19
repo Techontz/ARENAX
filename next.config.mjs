@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Config options here
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname:
+          'img.sofascore.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
