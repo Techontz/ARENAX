@@ -199,15 +199,11 @@ export const ScheduleView = ({
       <div className="flex items-center justify-between gap-2">
         {/* HOME */}
         <div className="flex flex-col items-center gap-1.5 lg:gap-2 flex-1 min-w-0">
-        <img
-  src={m.logoA}
-  alt={m.teamA}
-  onError={(e) => {
-    e.currentTarget.src =
-      'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
-  }}
-  className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
-/>
+          <img
+            src={m.logoA}
+            alt={m.teamA}
+            className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
+          />
 
           <span className="text-[10px] lg:text-xs font-bold text-center truncate w-full">
             {m.teamA}
@@ -227,15 +223,11 @@ export const ScheduleView = ({
 
         {/* AWAY */}
         <div className="flex flex-col items-center gap-1.5 lg:gap-2 flex-1 min-w-0">
-        <img
-  src={m.logoB}
-  alt={m.teamB}
-  onError={(e) => {
-    e.currentTarget.src =
-      'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
-  }}
-  className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
-/>
+          <img
+            src={m.logoB}
+            alt={m.teamB}
+            className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
+          />
 
           <span className="text-[10px] lg:text-xs font-bold text-center truncate w-full">
             {m.teamB}
