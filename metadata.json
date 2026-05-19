@@ -1,0 +1,8 @@
+{
+  "name": "ArenaX Live",
+  "description": "Ultra-premium football live streaming platform with real-time scores and interactive chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
