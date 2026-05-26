@@ -58,8 +58,16 @@ export const LiveMatchesView = () => {
     async () => {
       try {
         // LIVE MATCHES
+        const response =
+          await fetch(
+            'https://www.sofascore.com/api/v1/sport/football/events/live'
+          );
+
+        const data =
+          await response.json();
+
         const liveData =
-          await fetchLiveMatches();
+          data.events || [];
 
         const formattedMatches: Match[] =
           (liveData || [])
@@ -233,14 +241,19 @@ export const LiveMatchesView = () => {
           formattedMatches
         );
 
-        // TODAY UPCOMING MATCHES
+        // UPCOMING MATCHES
+        const today =
+          new Date()
+            .toISOString()
+            .split('T')[0];
+
         const upcomingRes =
           await fetch(
-            '/api/upcoming-matches'
+            `https://www.sofascore.com/api/v1/sport/football/scheduled-events/${today}`
           );
 
         const upcomingData =
-        await upcomingRes.json();
+          await upcomingRes.json();
 
         const formattedUpcoming: UpcomingMatch[] =
           (
