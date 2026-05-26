@@ -70,9 +70,22 @@ export const LiveMatchesView = () => {
           })
         );
 
-      setMatches(
-        formattedMatches
-      );
+        setMatches(
+          formattedMatches
+        );
+        
+        // SAVE CACHE
+        localStorage.setItem(
+          'live_matches',
+          JSON.stringify(
+            formattedMatches
+          )
+        );
+        
+        localStorage.setItem(
+          'live_matches_time',
+          Date.now().toString()
+        );
     } catch (error) {
       console.error(
         'Error loading matches:',
@@ -84,6 +97,37 @@ export const LiveMatchesView = () => {
   };
 
   useEffect(() => {
+    const cachedMatches =
+      localStorage.getItem(
+        'live_matches'
+      );
+  
+    const lastFetch =
+      localStorage.getItem(
+        'live_matches_time'
+      );
+  
+    const now = Date.now();
+  
+    // 2 minutes cache
+    const CACHE_DURATION =
+      2 * 60 * 1000;
+  
+    if (
+      cachedMatches &&
+      lastFetch &&
+      now - Number(lastFetch) <
+        CACHE_DURATION
+    ) {
+      setMatches(
+        JSON.parse(cachedMatches)
+      );
+  
+      setLoading(false);
+  
+      return;
+    }
+  
     loadMatches();
   }, []);
 

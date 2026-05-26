@@ -22,8 +22,6 @@ import { ChatPanel } from '@/components/chat/ChatPanel';
 
 import { LiveMatchesView } from '@/components/matches/LiveMatchesView';
 
-import { ScheduleView } from '@/components/matches/ScheduleView';
-
 import { MyListView } from '@/components/matches/MyListView';
 
 import { ProfileView } from '@/components/profile/ProfileView';
@@ -55,9 +53,20 @@ export default function Home() {
         'activeTab'
       );
 
-    if (savedTab) {
-      setActiveTab(savedTab);
-    }
+      const allowedTabs = [
+        'Live',
+        'All Matches',
+        'My List',
+        'Chat',
+        'Profile',
+      ];
+      
+      if (
+        savedTab &&
+        allowedTabs.includes(savedTab)
+      ) {
+        setActiveTab(savedTab);
+      }
   }, []);
 
   useEffect(() => {
@@ -304,40 +313,6 @@ export default function Home() {
 
                         <LiveMatchesView />
                       </div>
-
-                      {/* COMING SOON */}
-                      <div className="flex flex-col gap-6">
-                        <div className="flex items-center justify-between px-1">
-                          <div>
-                            <h2 className="text-lg lg:text-xl font-bold">
-                              Coming
-                              Soon
-                              Matches
-                            </h2>
-
-                            <p className="text-xs text-[var(--color-text-secondary)]">
-                              Today's
-                              upcoming
-                              football
-                              fixtures
-                            </p>
-                          </div>
-
-                          <button
-                            onClick={() =>
-                              setActiveTab(
-                                'Schedule'
-                              )
-                            }
-                            className="text-[var(--color-brand)] text-xs lg:text-sm font-bold hover:underline"
-                          >
-                            View
-                            All
-                          </button>
-                        </div>
-
-                        <ScheduleView showHeader={false} />
-                      </div>
                     </div>
 
                     <SubscriptionPromo
@@ -350,9 +325,6 @@ export default function Home() {
                       }
                     />
                   </>
-                ) : activeTab ===
-                  'Schedule' ? (
-                  <ScheduleView />
                 ) : activeTab ===
                   'All Matches' ? (
                   <div className="flex flex-col gap-10">
@@ -386,25 +358,6 @@ export default function Home() {
                       </div>
 
                       <LiveMatchesView />
-                    </div>
-
-                    {/* TODAY FIXTURES */}
-                    <div className="flex flex-col gap-6">
-                      <div>
-                        <h2 className="text-2xl font-bold">
-                          Today's
-                          Matches
-                        </h2>
-
-                        <p className="text-sm text-[var(--color-text-secondary)]">
-                          Upcoming
-                          football
-                          fixtures
-                          today
-                        </p>
-                      </div>
-
-                      <ScheduleView />
                     </div>
                   </div>
                 ) : activeTab ===
