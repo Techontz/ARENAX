@@ -235,9 +235,9 @@ export const LiveMatchesView = () => {
 
         // TODAY UPCOMING MATCHES
         const upcomingRes =
-        await fetch(
-          'https://www.sofascore.com/api/v1/sport/football/scheduled-events/today'
-        );
+          await fetch(
+            '/api/upcoming-matches'
+          );
 
         const upcomingData =
         await upcomingRes.json();

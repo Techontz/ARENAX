@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const response =
       await fetch(
-        'https://www.sofascore.com/api/v1/sport/football/events/live',
+        'https://www.sofascore.com/api/v1/sport/football/scheduled-events/today',
         {
           method: 'GET',
 
@@ -15,12 +15,6 @@ export async function GET() {
             'accept-language':
               'en-US,en;q=0.9',
 
-            'cache-control':
-              'no-cache',
-
-            pragma:
-              'no-cache',
-
             referer:
               'https://www.sofascore.com/',
 
@@ -28,25 +22,12 @@ export async function GET() {
               'https://www.sofascore.com',
 
             'user-agent':
-              'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36',
+              'Mozilla/5.0',
           },
 
           cache: 'no-store',
         }
       );
-
-    if (!response.ok) {
-      return NextResponse.json(
-        {
-          error:
-            'Failed to fetch live matches',
-        },
-        {
-          status:
-            response.status,
-        }
-      );
-    }
 
     const data =
       await response.json();
@@ -55,15 +36,10 @@ export async function GET() {
       data
     );
   } catch (error) {
-    console.error(
-      'SOFASCORE ERROR:',
-      error
-    );
-
     return NextResponse.json(
       {
         error:
-          'Server error',
+          'Failed to fetch upcoming matches',
       },
       {
         status: 500,
