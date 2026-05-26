@@ -60,7 +60,10 @@ export const LiveMatchesView = () => {
         // LIVE MATCHES
         const response =
           await fetch(
-            'https://www.sofascore.com/api/v1/sport/football/events/live'
+            'https://www.sofascore.com/api/v1/sport/football/events/live',
+            {
+              cache: 'no-store',
+            }
           );
 
         const data =
@@ -247,10 +250,13 @@ export const LiveMatchesView = () => {
             .toISOString()
             .split('T')[0];
 
-        const upcomingRes =
-          await fetch(
-            `https://www.sofascore.com/api/v1/sport/football/scheduled-events/${today}`
-          );
+          const upcomingRes =
+            await fetch(
+              `https://www.sofascore.com/api/v1/sport/football/scheduled-events/${today}`,
+              {
+                cache: 'no-store',
+              }
+            );
 
         const upcomingData =
           await upcomingRes.json();
@@ -335,55 +341,54 @@ export const LiveMatchesView = () => {
       }
     };
 
-  useEffect(() => {
-    const cachedMatches =
-      localStorage.getItem(
-        'live_matches'
-      );
-
-    const lastFetch =
-      localStorage.getItem(
-        'live_matches_time'
-      );
-
-    const now =
-      Date.now();
-
-    const CACHE_DURATION =
-      2 * 60 * 1000;
-
-    // CACHE
-    if (
-      cachedMatches &&
-      lastFetch &&
-      now -
-        Number(
-          lastFetch
-        ) <
-        CACHE_DURATION
-    ) {
-      setMatches(
-        JSON.parse(
-          cachedMatches
-        )
-      );
-
-      setLoading(false);
-    } else {
+    useEffect(() => {
+      const cachedMatches =
+        localStorage.getItem(
+          'live_matches'
+        );
+    
+      const lastFetch =
+        localStorage.getItem(
+          'live_matches_time'
+        );
+    
+      const now =
+        Date.now();
+    
+      const CACHE_DURATION =
+        2 * 60 * 1000;
+    
+      // LOAD LIVE CACHE
+      if (
+        cachedMatches &&
+        lastFetch &&
+        now -
+          Number(lastFetch) <
+          CACHE_DURATION
+      ) {
+        setMatches(
+          JSON.parse(
+            cachedMatches
+          )
+        );
+    
+        setLoading(false);
+      }
+    
+      // ALWAYS FETCH FRESH DATA
       loadMatches();
-    }
-
-    // AUTO REFRESH
-    const interval =
-      setInterval(() => {
-        loadMatches();
-      }, 120000);
-
-    return () =>
-      clearInterval(
-        interval
-      );
-  }, []);
+    
+      // AUTO REFRESH
+      const interval =
+        setInterval(() => {
+          loadMatches();
+        }, 120000);
+    
+      return () =>
+        clearInterval(
+          interval
+        );
+    }, []);
 
   const allLeagues =
     useMemo(() => {
