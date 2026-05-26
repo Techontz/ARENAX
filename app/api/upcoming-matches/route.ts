@@ -1,25 +1,19 @@
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 export async function GET() {
   try {
     const response =
       await fetch(
         'https://www.sofascore.com/api/v1/sport/football/scheduled-events/today',
         {
-          method: 'GET',
-
           headers: {
             accept:
-              'application/json, text/plain, */*',
-
-            'accept-language':
-              'en-US,en;q=0.9',
+              'application/json',
 
             referer:
               'https://www.sofascore.com/',
-
-            origin:
-              'https://www.sofascore.com',
 
             'user-agent':
               'Mozilla/5.0',
@@ -29,17 +23,25 @@ export async function GET() {
         }
       );
 
-    const data =
-      await response.json();
+    const text =
+      await response.text();
 
-    return NextResponse.json(
-      data
+    return new Response(
+      text,
+      {
+        status: 200,
+
+        headers: {
+          'content-type':
+            'application/json',
+        },
+      }
     );
   } catch (error) {
     return NextResponse.json(
       {
         error:
-          'Failed to fetch upcoming matches',
+          'Failed to fetch',
       },
       {
         status: 500,
