@@ -20,39 +20,79 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
         )}
       </div>
 
-      <div className="flex items-center justify-between px-1 lg:px-2 mb-2 relative">
-        <div className="flex flex-col items-center gap-2 w-12 lg:w-16">
-        <img
-          src={match.teamA.logo}
-          alt={match.teamA.name}
-          className="w-8 h-8 lg:w-10 lg:h-10 object-contain"
-          onError={(e) => {
-            e.currentTarget.src =
-              '/images/default-team.png';
-          }}
-        />
-        </div>
+      <div className="relative mb-4">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
         
-        <div className="flex items-center gap-3 lg:gap-4">
-          <span className="text-2xl lg:text-3xl font-bold tracking-tight">{match.score.a}</span>
-          <span className="text-2xl lg:text-3xl font-light text-[var(--color-text-secondary)] opacity-30">-</span>
-          <span className="text-2xl lg:text-3xl font-bold tracking-tight">{match.score.b}</span>
+        {/* HOME */}
+        <div className="flex flex-col items-center justify-center min-w-0">
+          <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white border border-[var(--color-border-main)] shadow-sm flex items-center justify-center mb-2">
+            <img
+              src={match.teamA.logo}
+              alt={match.teamA.name}
+              loading="lazy"
+              className="w-9 h-9 lg:w-11 lg:h-11 object-contain"
+              onError={(e) => {
+                e.currentTarget.src =
+                  '/images/default-team.png';
+              }}
+            />
+          </div>
+
+          <span className="w-full text-center text-[12px] lg:text-sm font-semibold text-[var(--color-text-primary)] whitespace-nowrap overflow-hidden text-ellipsis">
+            {match.teamA.name}
+          </span>
         </div>
 
-        <div className="flex flex-col items-center gap-2 w-12 lg:w-16">
-          <img src={match.teamB.logo} alt={match.teamB.name} className="w-8 h-8 lg:w-10 lg:h-10 object-contain" />
+        {/* SCORE */}
+        <div className="flex flex-col items-center justify-center px-2">
+          <div className="flex items-center gap-2 lg:gap-3">
+            <span className="text-3xl lg:text-4xl font-black tracking-tight">
+              {match.score.a}
+            </span>
+
+            <span className="text-xl lg:text-2xl font-light text-[var(--color-text-secondary)] opacity-40">
+              —
+            </span>
+
+            <span className="text-3xl lg:text-4xl font-black tracking-tight">
+              {match.score.b}
+            </span>
+          </div>
+
+          <span className="mt-2 text-[11px] lg:text-xs font-bold text-[var(--color-live-red)] uppercase tracking-wide">
+            {match.time}
+          </span>
         </div>
 
-        <button className="hidden lg:flex absolute -right-3 w-7 h-7 flex items-center justify-center rounded-full bg-white border border-[var(--color-border-main)] shadow-sm hover:bg-[#F0F0F5] transition-colors group-hover:translate-x-1">
-          <ChevronRight size={14} className="text-[var(--color-text-secondary)]" />
-        </button>
+        {/* AWAY */}
+        <div className="flex flex-col items-center justify-center min-w-0">
+          <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white border border-[var(--color-border-main)] shadow-sm flex items-center justify-center mb-2">
+            <img
+              src={match.teamB.logo}
+              alt={match.teamB.name}
+              loading="lazy"
+              className="w-9 h-9 lg:w-11 lg:h-11 object-contain"
+              onError={(e) => {
+                e.currentTarget.src =
+                  '/images/default-team.png';
+              }}
+            />
+          </div>
+
+          <span className="w-full text-center text-[12px] lg:text-sm font-semibold text-[var(--color-text-primary)] whitespace-nowrap overflow-hidden text-ellipsis">
+            {match.teamB.name}
+          </span>
+        </div>
       </div>
 
-      <div className="flex justify-between items-center px-1">
-        <span className="text-[11px] lg:text-xs font-semibold text-[var(--color-text-primary)] w-16 lg:w-20 text-center truncate">{match.teamA.name}</span>
-        <span className="text-[11px] lg:text-[12px] font-bold text-[var(--color-live-red)]">{match.time}</span>
-        <span className="text-[11px] lg:text-xs font-semibold text-[var(--color-text-primary)] w-16 lg:w-20 text-center truncate">{match.teamB.name}</span>
-      </div>
+      {/* DESKTOP ARROW */}
+      <button className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-3 w-8 h-8 items-center justify-center rounded-full bg-white border border-[var(--color-border-main)] shadow-sm hover:bg-[#F5F5F7] transition-all group-hover:translate-x-1">
+        <ChevronRight
+          size={15}
+          className="text-[var(--color-text-secondary)]"
+        />
+      </button>
+    </div>
     </div>
   );
 };
